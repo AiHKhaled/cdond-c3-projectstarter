@@ -291,7 +291,7 @@ jobs:
           command: |
             cd frontend
             sudo npm install -g npm@latest
-            rm -rf node_modules I
+            rm -rf node_modules
             npm install
             npm run build
             aws s3 cp dist s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7} --recursive
