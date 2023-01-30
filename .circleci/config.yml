@@ -23,9 +23,9 @@ commands:
           name: Destroy environments
           when: on_fail
           command: |
-          aws s3 rm s3://udapeople-<<parameters.workflow_id>> --recursive
-          aws cloudformation delete-stack --stack-name "udapeople-backend-<<parameters.workflow_id>>"
-          aws cloudformation delete-stack --stack-name "udapeople-frontend-<<parameters.workflow_id>>"
+            aws s3 rm s3://udapeople-<<parameters.workflow_id>> --recursive
+            aws cloudformation delete-stack --stack-name "udapeople-backend-<<parameters.workflow_id>>"
+            aws cloudformation delete-stack --stack-name "udapeople-frontend-<<parameters.workflow_id>>"
 
   revert-migrations:
     description: Revert the last migration if successfully run in the current workflow.
@@ -36,14 +36,14 @@ commands:
           name: Revert migrations
           # Add when this will run
           command: |
-           # Curl command here to see if there was a successful migration associated with the workflow id, store result in SUCCESS variable 
-          SUCCESS=$(curl --insecure "https://kvdb.io/GihzLn9tKaS8UmwtTTnRhb/migration_<<parameters.workflow_id>>")
-          if(( $SUCCESS==1 ));
-          then
-            cd ~/project/backend
-            npm install
-            npm run migrations:revert
-          fi
+             # Curl command here to see if there was a successful migration associated with the workflow id, store result in SUCCESS variable 
+            SUCCESS=$(curl --insecure "https://kvdb.io/GihzLn9tKaS8UmwtTTnRhb/migration_<<parameters.workflow_id>>")
+            if(( $SUCCESS==1 ));
+            then
+              cd ~/project/backend
+              npm install
+              npm run migrations:revert
+            fi
 
 jobs:
   build-frontend:
