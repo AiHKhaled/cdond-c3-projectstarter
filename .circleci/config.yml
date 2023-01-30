@@ -231,7 +231,8 @@ jobs:
       - checkout
       - run:
           name: Run migrations
-          command: cd backend
+          command: |
+            cd backend
             npm install
             npm run migrations > migrations_dump.txt
       - run:
