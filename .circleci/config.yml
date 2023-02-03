@@ -247,15 +247,14 @@ jobs:
           name: Run migrations
           command: |
             cd backend
-            npm cache clean --force
-            npm install --force
+            npm install
             npm run migrations > migrations_dump.txt
       - run:
           name: Send migration results to kvdb
           command: |
             if grep -q "has been executed successfully." ~/project/backend/migrations_dump.txt
             then
-             curl --insecure https://kvdb.io/FnYbeNhtKqgstTNswp2Xzp/migration_${CIRCLE_WORKFLOW_ID:0:7} -d '1'
+             curl --insecure https://kvdb.io/8iHBPvVVJXtSVD6Wu24r4c/migration_${CIRCLE_WORKFLOW_ID:0:7} -d '1'
             fi
       - destroy-environment
       - revert-migrations
@@ -293,7 +292,6 @@ jobs:
             cd frontend
             sudo npm install -g npm@latest
             rm -rf node_modules
-            npm cache clean --force
             npm install
             npm run build
             aws s3 cp dist s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7} --recursive
