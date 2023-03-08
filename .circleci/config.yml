@@ -362,6 +362,7 @@ jobs:
             echo ${API_URL}
             echo "sleep for one minute"
             sleep 60
+            echo ${API_URL}/api/status 
             if curl -s ${API_URL}/api/status | grep "ok"
             then
                 exit 0
